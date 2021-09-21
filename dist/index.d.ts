@@ -10,7 +10,7 @@ export declare class DataLoaderInterceptor implements NestInterceptor {
     constructor(moduleRef: ModuleRef);
     intercept(context: ExecutionContext, next: CallHandler): Observable<any>;
 }
-export declare const Loader: (...dataOrPipes: (string | Function | import("@nestjs/common").PipeTransform<any, any> | import("@nestjs/common").Type<import("@nestjs/common").PipeTransform<any, any>>)[]) => ParameterDecorator;
+export declare const Loader: (...dataOrPipes: (Function | import("@nestjs/common").PipeTransform<any, any> | import("@nestjs/common").Type<import("@nestjs/common").PipeTransform<any, any>>)[]) => ParameterDecorator;
 export declare const ensureOrder: (options: any) => any;
 interface IOrderedNestDataLoaderOptions<ID, Type> {
     propertyKey?: string;

@@ -63,18 +63,17 @@ DataLoaderInterceptor = __decorate([
 ], DataLoaderInterceptor);
 exports.DataLoaderInterceptor = DataLoaderInterceptor;
 exports.Loader = (0, common_1.createParamDecorator)((data, context) => {
-    const name = typeof data === "string" ? data : data === null || data === void 0 ? void 0 : data.name;
-    if (!name) {
-        throw new common_1.InternalServerErrorException(`Invalid name provider to @Loader ('${name}')`);
+    if (!data) {
+        throw new common_1.InternalServerErrorException(`No loader provided to @Loader ('${data}')`);
     }
     if (context.getType() !== "graphql") {
         throw new common_1.InternalServerErrorException("@Loader should only be used within the GraphQL context");
     }
     const ctx = graphql_1.GqlExecutionContext.create(context).getContext();
-    if (!name || !ctx[NEST_LOADER_CONTEXT_KEY]) {
+    if (!ctx[NEST_LOADER_CONTEXT_KEY]) {
         throw new common_1.InternalServerErrorException(`You should provide interceptor ${DataLoaderInterceptor.name} globally with ${core_1.APP_INTERCEPTOR}`);
     }
-    return ctx[NEST_LOADER_CONTEXT_KEY].getLoader(name);
+    return ctx[NEST_LOADER_CONTEXT_KEY].getLoader(data);
 });
 const ensureOrder = (options) => {
     const { docs, keys, prop, error = (key) => `Document does not exist (${key})`, } = options;
